@@ -9,9 +9,9 @@ The reasoning behind building an `entity` like this would be
  - I dunno, maybe a few other things? Will update as I find more reasons
 
 ## Optional Dependencies for this example
- - phive to install build tools
- - phpab to generate autoloader
- - ant to use build.xml
+ - [phive](https://github.com/phar-io/phive) to install build tools
+ - [phpab](https://github.com/theseer/Autoload)(`phive install phpab`) to generate autoloader
+ - [ant](http://ant.apache.org/manual/install.html) to use build.xml targets
 
 ```
     ./build/install-tools.sh
