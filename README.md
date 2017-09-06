@@ -13,15 +13,15 @@ The reasoning behind building an `entity` like this would be
 ## What is a `Loader`?
 The loader has the [single responsibility](https://en.wikipedia.org/wiki/Single_responsibility_principle) of loading requested data from a datasource.
 
-##What is a `Mapper`?
+## What is a `Mapper`?
 The `Mapper` has the single responsibility of mapping data from the `Loader` (in the form of an array usually) into an `Entity` object.
 This is accomplished via the private `map()` function.
 > I prefer to have this function return an `EntityCollection` rather than an array so you will always know what you are dealing with.
 
-##What is an `Entity`?
+## What is an `Entity`?
 Generic placeholder for whatever object you are trying to create. (User, Session, Book, etc.)
 
-#To Run
+# To Run
 ```    
     php example.php
 ```
