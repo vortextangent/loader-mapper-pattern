@@ -2,7 +2,7 @@
 
     namespace RiskalyzeDomainObjects\Library\ScalarObjects;
 
-use riskalyze\core\libraries\exceptions\InvalidArgumentException;
+use Library\Exceptions\InvalidArgumentException;
 
 abstract class IntegerValueObject
 {
@@ -11,6 +11,9 @@ abstract class IntegerValueObject
      */
     private $int;
 
+    /**
+     * @param $int
+     */
     public function __construct($int)
     {
         $this->ensureIsInt($int);
@@ -18,6 +21,11 @@ abstract class IntegerValueObject
         $this->int = $int;
     }
 
+    /**
+     * @param $int
+     *
+     * @throws InvalidArgumentException
+     */
     private function ensureIsInt($int)
     {
         if (!is_int($int)) {

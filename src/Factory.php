@@ -35,9 +35,14 @@ class Factory
      *
      * @return UserLoader
      */
-    private function createUserMysqliLoader()
+    private function createUserLoader()
     {
-        return new UserMysqliLoader($this->createDatabase());
+        if (isset($this->config['useDb'])) {
+            return new UserMysqliLoader($this->createDatabase());
+        }
+
+        return new UserArrayLoader();
+
     }
 
     /**
@@ -48,11 +53,6 @@ class Factory
     private function createDatabase()
     {
         return new mysqli();
-    }
-
-    public function createUserLoader()
-    {
-        return new UserArrayLoader();
     }
 
 }

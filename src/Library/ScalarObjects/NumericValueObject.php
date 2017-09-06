@@ -2,10 +2,14 @@
 
     namespace RiskalyzeDomainObjects\Library\ScalarObjects;
 
-use riskalyze\core\libraries\exceptions\InvalidArgumentException;
+    use Library\Exceptions\InvalidArgumentException;
 
 class NumericValueObject
 {
+
+    /**
+     * @var
+     */
     private $number;
 
     /**
@@ -19,6 +23,11 @@ class NumericValueObject
         $this->number = $number;
     }
 
+    /**
+     * @param $number
+     *
+     * @throws InvalidArgumentException
+     */
     private function ensureIsNumeric($number)
     {
         if (!is_numeric($number)) {

@@ -8,15 +8,22 @@
 
     abstract class Identifier implements JsonSerializable
     {
-        //<editor-fold defaultstate="collapsed" desc="Properties">
-        //</editor-fold>
+        /**
+         * @return string
+         */
         public function asString()
         {
             return $this->__toString();
         }
 
+        /**
+         * @return int
+         */
         abstract public function asInt();
 
+        /**
+         * @return string
+         */
         abstract public function __toString();
 
     }

@@ -31,7 +31,7 @@ class UserMysqliLoader implements UserLoader
      * @return mysqli_result
      * @throws ApplicationException
      */
-    public function query($sql)
+    private function query($sql)
     {
         d($sql, 5);
 
@@ -49,7 +49,7 @@ class UserMysqliLoader implements UserLoader
      * @return mysqli_stmt
      * @throws ApplicationException
      */
-    protected function prepareStatement($sql)
+    private function prepareStatement($sql)
     {
         //Log Sql here
         //d($sql, 5);
@@ -67,7 +67,7 @@ class UserMysqliLoader implements UserLoader
      *
      * @throws ApplicationException
      */
-    protected function bindParamsToFetchByIdStatement(mysqli_stmt $statement, UserId $id): void
+    private function bindParamsToFetchByIdStatement(mysqli_stmt $statement, UserId $id): void
     {
         if ($statement->bind_param('i', $id->asInt()) === false) {
             throw new ApplicationException("Unable to bind Parameters to Query: {$this->mysqli->error}");
@@ -82,7 +82,7 @@ class UserMysqliLoader implements UserLoader
      * @throws DuplicateEntityException
      * @throws ForeignKeyConstraintViolationException
      */
-    public function executeStatement(mysqli_stmt $statement): bool
+    private function executeStatement(mysqli_stmt $statement): bool
     {
         $result = $statement->execute();
         if ($result === false) {
@@ -110,7 +110,7 @@ class UserMysqliLoader implements UserLoader
      * @return array
      * @throws ApplicationException
      */
-    public function fetchResults(mysqli_stmt $statement): array
+    private function fetchResults(mysqli_stmt $statement): array
     {
         /**
          * @var array $rows

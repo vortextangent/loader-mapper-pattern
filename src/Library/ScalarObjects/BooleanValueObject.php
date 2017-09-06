@@ -2,7 +2,7 @@
 
     namespace RiskalyzeDomainObjects\Library\ScalarObjects;
 
-use riskalyze\core\libraries\exceptions\InvalidArgumentException;
+    use Library\Exceptions\InvalidArgumentException;
 
 class BooleanValueObject
 {
@@ -11,6 +11,9 @@ class BooleanValueObject
      */
     private $status;
 
+    /**
+     * @param $status
+     */
     public function __construct($status)
     {
         $this->ensureIsBoolean($status);
@@ -18,6 +21,11 @@ class BooleanValueObject
         $this->status = $status;
     }
 
+    /**
+     * @param $status
+     *
+     * @throws InvalidArgumentException
+     */
     private function ensureIsBoolean($status)
     {
         if (!is_bool($status)) {

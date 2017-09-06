@@ -35,7 +35,7 @@ class UserArrayLoader implements UserLoader
     /**
      * @param UserId $userId
      *
-     * @return array
+     * @return User[]
      */
     public function fetchDataById(UserId $userId): array
     {

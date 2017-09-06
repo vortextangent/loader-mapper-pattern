@@ -12,7 +12,7 @@
         private $uuid;
 
         /**
-         * @param int|string $uuid
+         * @param string $uuid
          */
         private function __construct($uuid = "")
         {
@@ -46,6 +46,9 @@
             return new static($string);
         }
 
+        /**
+         * @return string
+         */
         public function __toString()
         {
             return (string)$this->uuid;
@@ -138,6 +141,9 @@
             return $this->uuid;
         }
 
+        /**
+         * @return number
+         */
         public function asInt()
         {
             return bindec(hex2bin(str_replace('-','',$this->uuid)));
