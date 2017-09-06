@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="example" default="lint" basedir=".">
+    <property environment="env"/>
+
+    <target name="generate-autoloader" description="Generate autoloader code">
+        <exec executable="build/tools/phpab" taskname="phpab">
+            <arg value="--output"/>
+            <arg path="autoload.php"/>
+            <arg path="src"/>
+        </exec>
+    </target>
+
+    <target name="lint" unless="php-syntax-check.done" depends="generate-autoloader">
+        <apply executable="php" failonerror="true" taskname="lint">
+            <arg value="-l"/>
+
+            <fileset dir="${basedir}">
+                <include name="**/*.php"/>
+                <modified/>
+            </fileset>
+
+        </apply>
+        <property name="php-syntax-check.done" value="true"/>
+    </target>
+
+</project>
+
