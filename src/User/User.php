@@ -31,11 +31,11 @@ class User
      * @param UserId $id
      * @param UserName $name
      *
-     * @return static
+     * @return User
      */
-    public static function fromState(UserId $id, UserName $name)
+    public static function fromState(UserId $id, UserName $name): User
     {
-        return new static($id, $name);
+        return new User($id, $name);
     }
 
 }

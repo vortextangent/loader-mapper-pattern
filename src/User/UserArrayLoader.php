@@ -42,7 +42,7 @@ class UserArrayLoader implements UserLoader
         $this->userToFind = $userId;
         $user = array_filter($this->users, [$this,'findUser']);
         unset($this->userToFind);
-        return $user;
+        return current($user);
     }
 
     /**
@@ -50,7 +50,7 @@ class UserArrayLoader implements UserLoader
      *
      * @return bool
      */
-    private function findUser($user)
+    private function findUser($user): bool
     {
         return $user['id'] === $this->userToFind->asString();
     }

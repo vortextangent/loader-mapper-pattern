@@ -12,8 +12,6 @@ use mysqli_stmt;
 class UserMysqliLoader implements UserLoader
 {
 
-    //<editor-fold defaultstate="collapsed" desc="Potential MysqliAdapter Abstract Class stuff">
-
     /** @var mysqli */
     private $mysqli;
 
@@ -31,9 +29,9 @@ class UserMysqliLoader implements UserLoader
      * @return mysqli_result
      * @throws ApplicationException
      */
-    private function query($sql)
+    private function query($sql): mysqli_result
     {
-        d($sql, 5);
+        //d($sql, 5);
 
         $result = $this->mysqli->query($sql, MYSQLI_USE_RESULT);
         if ($result === false) {
@@ -49,7 +47,7 @@ class UserMysqliLoader implements UserLoader
      * @return mysqli_stmt
      * @throws ApplicationException
      */
-    private function prepareStatement($sql)
+    private function prepareStatement($sql): mysqli_stmt
     {
         //Log Sql here
         //d($sql, 5);
@@ -105,29 +103,6 @@ class UserMysqliLoader implements UserLoader
     }
 
     /**
-     * @param mysqli_stmt $statement
-     *
-     * @return array
-     * @throws ApplicationException
-     */
-    private function fetchResults(mysqli_stmt $statement): array
-    {
-        /**
-         * @var array $rows
-         */
-        $result = $statement->get_result();
-        if ($result === false) {
-            $errno = $this->mysqli->errno;
-            $error = $this->mysqli->error;
-
-            throw new ApplicationException("Unable to get result set: ({$errno}) {$error}");
-        }
-
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-    //</editor-fold>
-
-    /**
      * @param UserId $userId
      *
      * @return array
@@ -142,7 +117,47 @@ class UserMysqliLoader implements UserLoader
 
         $this->executeStatement($statement);
 
-        return $this->fetchResults($statement);
+        return $this->fetchRow($statement);
+    }
+
+    /**
+     * @param mysqli_stmt $statement
+     *
+     * @return array
+     * @throws ApplicationException
+     */
+    private function fetchAll(mysqli_stmt $statement): array
+    {
+        $result = $this->checkResult($statement);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    private function fetchRow(mysqli_stmt $statement): array
+    {
+        $result = $this->checkResult($statement);
+
+        return $result->fetch_assoc();
+
+    }
+
+    /**
+     * @param mysqli_stmt $statement
+     *
+     * @return mysqli_result
+     * @throws ApplicationException
+     */
+    private function checkResult(mysqli_stmt $statement): mysqli_result
+    {
+        $result = $statement->get_result();
+        if ($result === false) {
+            $errno = $this->mysqli->errno;
+            $error = $this->mysqli->error;
+
+            throw new ApplicationException("Unable to get result set: ({$errno}) {$error}");
+        }
+
+        return $result;
     }
 
 }

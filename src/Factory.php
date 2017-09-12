@@ -25,7 +25,7 @@ class Factory
     /**
      * @return UserMapper
      */
-    public function createUserMapper()
+    public function createUserMapper(): UserMapper
     {
         return new UserMapper($this->createUserLoader());
     }
@@ -35,7 +35,7 @@ class Factory
      *
      * @return UserLoader
      */
-    private function createUserLoader()
+    private function createUserLoader(): UserLoader
     {
         if (isset($this->config['useDb'])) {
             return new UserMysqliLoader($this->createDatabase());
@@ -50,7 +50,7 @@ class Factory
      *
      * @return mysqli
      */
-    private function createDatabase()
+    private function createDatabase(): mysqli
     {
         return new mysqli();
     }

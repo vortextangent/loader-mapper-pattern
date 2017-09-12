@@ -24,30 +24,28 @@ class UserMapper
     /**
      * @param UserId $id
      *
-     * @return array
+     * @return User
      */
-    public function user(UserId $id)
+    public function user(UserId $id): User
     {
         $data = $this->loader->fetchDataById($id);
+        $user = $this->map($data);
 
-        return $this->map($data);
+        return $user;
     }
 
     /**
      * @param array $data
      *
-     * @return array
+     * @return User
      */
-    private function map(array $data)
+    private function map(array $data): User
     {
-        $usersArray = [];
-        foreach ($data as $dataRow) {
-            $usersArray[] = User::fromState(
-                UserId::fromString($dataRow['id']),
-                new UserName($dataRow['name'])
-            );
-        }
+        $user = User::fromState(
+            UserId::fromString($data['id']),
+            new UserName($data['name'])
+        );
 
-        return $usersArray;
+        return $user;
     }
 }

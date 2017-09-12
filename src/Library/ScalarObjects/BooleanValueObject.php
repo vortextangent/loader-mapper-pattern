@@ -26,7 +26,7 @@ class BooleanValueObject
      *
      * @throws InvalidArgumentException
      */
-    private function ensureIsBoolean($status)
+    private function ensureIsBoolean($status): void
     {
         if (!is_bool($status)) {
             throw new InvalidArgumentException(static::class . 'must be a boolean.');
@@ -36,7 +36,7 @@ class BooleanValueObject
     /**
      * @return boolean
      */
-    public function asBool()
+    public function asBool(): bool
     {
         return $this->status;
     }

@@ -26,7 +26,7 @@ abstract class IntegerValueObject
      *
      * @throws InvalidArgumentException
      */
-    private function ensureIsInt($int)
+    private function ensureIsInt($int): void
     {
         if (!is_int($int)) {
             throw new InvalidArgumentException(
@@ -38,7 +38,7 @@ abstract class IntegerValueObject
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->int;
     }
@@ -46,7 +46,7 @@ abstract class IntegerValueObject
     /**
      * @return int
      */
-    public function asInt()
+    public function asInt(): int
     {
         return $this->int;
     }

@@ -26,7 +26,7 @@ abstract class StringValueObject implements JsonSerializable
      * @param $string
      * @throws InvalidArgumentException
      */
-    protected function ensureIsString($string)
+    protected function ensureIsString($string): void
     {
         if (!is_string($string)) {
             throw new InvalidArgumentException(static::class . " must be a string.");
@@ -45,7 +45,7 @@ abstract class StringValueObject implements JsonSerializable
      * @param  StringValueObject $string
      * @return bool
      */
-    public function equals(StringValueObject $string)
+    public function equals(StringValueObject $string): bool
     {
         return ($this->asString() === $string->asString());
     }
@@ -53,7 +53,7 @@ abstract class StringValueObject implements JsonSerializable
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->asString();
     }
@@ -65,7 +65,7 @@ abstract class StringValueObject implements JsonSerializable
      * which is a value of any type other than a resource.
      * @since 5.4.0
      */
-    function jsonSerialize()
+    function jsonSerialize(): mixed
     {
         return (string)$this;
     }
